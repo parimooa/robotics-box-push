@@ -1,17 +1,11 @@
 #define EMIT_PIN 11
 #define BR 5 //bump BumpSensor right
 #define BL 4 //bump BumpSensor left
-
+float forwardBias = 40;
 // Store our pin numbers into an array, which means
 // we can conveniently select one later.
-// ls(line BumpSensor)_pin
+
 int bump_pins[2] = {BR, BL};
-
-
-
-#define LS_PIN_COUNT 5
-#define MAX_SAMPLE 4
-#define THRESHOLD 1500
 
 
 class BumpSensor {
@@ -82,35 +76,41 @@ class BumpSensor {
       emitOFF();
 
     }
-    /*
-      float weighted_measure() {
-      float LS, MS, RS, total;
+    //   /*
+    float weighted_measure() {
+      float LS, RS, total;
 
-      LS = bump_sensor_reading[1];
-      MS = bump_sensor_reading[2];
-      RS = bump_sensor_reading[3];
+      LS = bump_sensor_reading[0];
+      RS = bump_sensor_reading[1];
 
-      total = LS + MS + RS;
+      // Remove the middle sensor from the calculation of the total
+      total = LS + RS;
       LS /= total;
-      MS /= total;
       RS /= total;
 
-      wleft = LS + (MS * 0.5);
-      wright = RS + (MS * 0.5);
+      // Modify the calculation of the weighted measures of the left and right bumper sensors to remove the middle sensor
+      float wleft = LS + (RS * 0.5);
+      float wright = RS + (LS * 0.5);
 
-      errorline = wleft - wright;
+      // Calculate the error line signal
+      float errorline = wleft - wright;
 
+      // Calculate the motor speed commands
       float Kp = 1;
-      controlSignal = errorline * Kp;
+      float controlSignal = errorline * Kp;
 
+      // Calculate the maximum turn
       float maxTurn = 50;
-
       maxTurn *= controlSignal;
+
+      // Print the maximum turn to the serial monitor
       Serial.print("maxTurn");
       Serial.print(maxTurn);
       Serial.println("");
+
       return maxTurn;
-      }
-    */
+    }
+
+//   */
 
 };
