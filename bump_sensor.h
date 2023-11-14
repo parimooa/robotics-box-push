@@ -3,7 +3,6 @@
 #define BL 4 //bump BumpSensor left
 float forwardBias = 40;
 // Store our pin numbers into an array, which means
-// we can conveniently select one later.
 
 int bump_pins[2] = {BR, BL};
 
