@@ -21,10 +21,10 @@ class RoboMotors {
       digitalWrite(R_DIR_PIN, FWD);
     }
 
-    void setMotorPower(float left_pwm, float right_pwm) {      
+    void setMotorPower(float left_pwm, float right_pwm) {
       if (left_pwm >= 0) {
         digitalWrite(L_DIR_PIN, REV);
-        
+
       } else if ( left_pwm < 0) {
         digitalWrite(L_DIR_PIN, FWD);
         left_pwm = abs(left_pwm);
@@ -32,11 +32,11 @@ class RoboMotors {
 
       if (right_pwm >= 0) {
         digitalWrite(R_DIR_PIN, REV);
-        
+
       } else if ( right_pwm < 0) {
         digitalWrite(R_DIR_PIN, FWD);
         right_pwm = abs(right_pwm);
-      }      
+      }
       analogWrite(L_PWM_PIN, left_pwm);
       analogWrite(R_PWM_PIN, right_pwm);
 
